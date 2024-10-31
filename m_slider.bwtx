@@ -1,0 +1,38 @@
+<section class="mew_mobile_slide mb-4">
+	<a class="d-none d-md-block w-100 h-100" href="{{ settings.msl_big_bn_url}}" title="{{ settings.msl_big_bn_alt | default : store.name}}">
+		<picture class="position-relative w-100 m-0 ratio1by4 d-block aspect">
+			<source media="(min-width: 1200px)" srcset="{{ 'big_bn_slide.png' | asset_url }}">
+			<source media="(min-width: 992px)" srcset="{{ 'big_bn_slide.png' | asset_url }}">
+			<source media="(max-width: 569px)" srcset="{{ 'big_bn_slide.png' | asset_url  | img_url:'icon'}}">
+			<source media="(max-width: 480px)" srcset="{{ 'big_bn_slide.png' | asset_url | img_url:'icon' }}">
+			<img class="d-block img img-cover position-absolute" src="{{ 'big_bn_slide.png' | asset_url }}" alt="{{ settings.msl_big_bn_alt | default : store.name}}"/>
+		</picture>
+	</a>
+	<div class="container">
+		<div class="mew_slide swiper-container position-relative">
+			<div class="swiper-wrapper">
+				{%-for i in (1..5)-%}
+				{%-capture enable_slide-%}display_slideshow_{{i}}{%-endcapture-%}
+				{%-capture naviimage-%}slide-img{{i}}.png{%-endcapture-%}
+				{%-capture url-%}slideshow_{{i}}_link{%-endcapture-%}
+				{%-capture alt-%}slide_{{i}}_alt{%-endcapture-%}
+				{%-if settings[enable_slide]-%}
+				<div class="swiper-slide text-center">
+					<a class="d-block w-100 h-100 rounded-10 modal-open" href="{{ settings[url]}}" title="{{ settings[alt] | default : store.name}}">
+						<picture class="position-relative w-100 m-0 ratio1by3 d-block aspect">
+							<source media="(min-width: 1200px)" srcset="{{ naviimage | asset_url }}">
+							<source media="(min-width: 992px)" srcset="{{ naviimage | asset_url }}">
+							<source media="(max-width: 569px)" srcset="{{ naviimage | asset_url  | img_url:'large'}}">
+							<source media="(max-width: 480px)" srcset="{{ naviimage | asset_url | img_url:'large' }}">
+							<img class="d-block img img-cover position-absolute" src="{{ naviimage | asset_url }}" alt="{{ settings[alt] | default : store.name}}"/>
+						</picture>
+					</a>
+				</div>
+				{%-endif-%}
+				{%-endfor-%}
+			</div>
+			<div class="swiper-button-prev msl_prev"></div>
+			<div class="swiper-button-next msl_next"></div>
+		</div>
+	</div>
+</section>
